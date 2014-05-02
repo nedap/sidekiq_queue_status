@@ -7,11 +7,21 @@ Lists latency for each sidekiq queue. The latency is the number of
 seconds the oldest job (next in line) is waiting to be performed.
 
 Under normal circumstances returns a `200 OK` status code. When latency
-is higher than the 30s default threshold, a `503 Service Unavailable` is
-returned.
+is higher than the 30s default threshold, or when the failure rate
+on the current day is higher than 10%, a `503 Service Unavailable`
+is returned.
 
 Thresholds are configurable by setting `config.queue_tresholds` hash.
 Key is queue name, value is latency threshold in seconds.
+Set `config.queue_failure_rate` to override the default failure rate.
+
+```ruby
+# config/application.rb
+Application.configure do
+  config.queue_tresholds['batch'] = 10.minutes
+  config.queue_failure_rate = 5
+end
+```
 
 Response body is a JSON object, listing the latencies of all queues and
 an array of error messages explaining which queues triggered a threshold
@@ -21,9 +31,10 @@ error.
 {
   "latencies": {
     "batch": 200,
-    "default": 1
+    "default": 1,
+    "failure_percentage": 25
   },
-  "errors": ["Queue batch above threshold of 100"]
+  "errors": ["Queue batch above threshold of 100", "Failure rate above 5%"]
 }
 ```
 
