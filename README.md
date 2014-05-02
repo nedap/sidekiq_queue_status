@@ -1,7 +1,7 @@
 # Sidekiq Queue Status
 
-Middleware to add `/queue-status` endpoint. Useful for pinging services
-such as Icinga or Nagios.
+Rails Middleware to add `/queue-status` endpoint. Useful for pinging
+services such as Icinga or Nagios.
 
 Lists latency for each sidekiq queue. The latency is the number of
 seconds the oldest job (next in line) is waiting to be performed.
@@ -25,3 +25,25 @@ error.
   errors: [“Queue batch above threshold of 100”]
 }
 ```
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'sidekiq_queue_status'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install sidekiq_queue_status
+
+## Contributing
+
+1. Fork it ( http://github.com/nedap/sidekiq_queue_status/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
