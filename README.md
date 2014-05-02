@@ -16,13 +16,14 @@ Key is queue name, value is latency threshold in seconds.
 Response body is a JSON object, listing the latencies of all queues and
 an array of error messages explaining which queues triggered a threshold
 error.
+
 ```json
 {
-  latencies: {
-    batch: 200,
-    default: 1
+  "latencies": {
+    "batch": 200,
+    "default": 1
   },
-  errors: [“Queue batch above threshold of 100”]
+  "errors": ["Queue batch above threshold of 100"]
 }
 ```
 
