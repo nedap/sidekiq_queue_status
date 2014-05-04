@@ -5,7 +5,10 @@ module SidekiqQueueStatus
     config.queue_tresholds = {}
     config.queue_failure_rate = nil
     initializer "sidekiq_queue_status.configure_rails_initialization" do |app|
-      app.middleware.use SidekiqQueueStatus::Middleware, app.config.queue_tresholds, app.config.queue_failure_rate
+      Metric.config = {}
+      Metric.config['queue_tresholds'] = app.config.queue_tresholds
+      Metric.config['queue_failure_rate'] = app.config.queue_failure_rate
+      app.middleware.use SidekiqQueueStatus::Middleware
     end
   end
 end
