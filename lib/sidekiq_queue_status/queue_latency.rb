@@ -8,7 +8,7 @@ module SidekiqQueueStatus
     end
 
     def queues_with_latency
-      Sidekiq::Queue.all.map { |q| [q.name, q.latency.to_i] }.to_h
+      Hash[*Sidekiq::Queue.all.map { |q| [q.name, q.latency.to_i] }.flatten]
     end
 
     def max_latency(name)
