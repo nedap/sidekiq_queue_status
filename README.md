@@ -32,8 +32,8 @@ error.
   "latencies": {
     "batch": 200,
     "default": 1,
-    "failure_percentage": 25
   },
+  "failure_percentage": 25
   "errors": ["Queue batch above threshold of 100", "Failure rate above 5%"]
 }
 ```
